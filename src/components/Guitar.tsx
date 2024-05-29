@@ -1,10 +1,5 @@
-type Guitar = {
-    id : number
-    name: string
-    image: string
-    description: string
-    price: number
-}
+import type { Guitar } from '../types/types'
+
 
 // Por convencion se asigna el nombre props al ultimo
 type GuitarProps = {
