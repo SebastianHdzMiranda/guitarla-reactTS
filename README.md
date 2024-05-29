@@ -75,6 +75,11 @@ export default {
         price: number
       }
 
+# inline Type
+
+  - Los tipos en línea (inline types) se refieren a la práctica de definir tipos directamente en el lugar donde se utilizan, en lugar de declarar un alias de tipo o una interfaz por separado. Esto puede hacer que el código sea más conciso y legible cuando se trata de tipos simples o de uso único. Los tipos en línea son especialmente útiles cuando se definen objetos o parámetros de función.
+
+  -void: se usa principalmente para indicar que una función no devuelve un valor. 
 
   
 

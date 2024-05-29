@@ -1,5 +1,14 @@
-function Guitar({guitar, addToCart}) {
-    const {id, name, image, description, price} = guitar;
+type Guitar = {
+    id : number
+    name: string
+    image: string
+    description: string
+    price: number
+}
+
+function Guitar({guitar, addToCart} : {guitar: Guitar, addToCart: (item: Guitar) => void
+}) {
+    const {name, image, description, price} = guitar;
 
 
     return (
