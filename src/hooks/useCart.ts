@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { db } from '../data/db'
 import { useMemo } from 'react'
+import type { CartItem } from '../types/types'
 
 // custom hooks 
 const useCart = ()=> {
 
-    const initialCart = () => {
-        const localStorageCart = localStorage.getItem('carrito');
+    const initialCart = () : CartItem[] => {
+        const localStorageCart  = localStorage.getItem('carrito');
         // Si no es nullo returname localStorage en formato json y si es nullo returname un array
         return localStorageCart ? JSON.parse(localStorageCart) : [];
     }
