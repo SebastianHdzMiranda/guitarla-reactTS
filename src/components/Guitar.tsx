@@ -6,8 +6,13 @@ type Guitar = {
     price: number
 }
 
-function Guitar({guitar, addToCart} : {guitar: Guitar, addToCart: (item: Guitar) => void
-}) {
+// Por convencion se asigna el nombre props al ultimo
+type GuitarProps = {
+    guitar: Guitar
+    addToCart: (item: Guitar) => void
+}
+
+function Guitar({guitar, addToCart} : GuitarProps ) {
     const {name, image, description, price} = guitar;
 
 
