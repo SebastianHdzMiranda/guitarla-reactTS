@@ -1,4 +1,16 @@
-function Header({carrito, deleteItem, incrementarCantidad, decrementarCantidad, vaciarCarrito, carritoVacio,carritoTotal}) {
+import { CartItem, GuitarID } from "../types/types";
+
+type HeaderProps = {
+    carrito: CartItem[]
+    deleteItem: (id: GuitarID) => void
+    incrementarCantidad: (id: GuitarID) => void
+    decrementarCantidad: (id: GuitarID) => void
+    vaciarCarrito: () => void
+    carritoVacio: boolean
+    carritoTotal: () => number
+}
+
+function Header({carrito, deleteItem, incrementarCantidad, decrementarCantidad, vaciarCarrito, carritoVacio, carritoTotal}: HeaderProps) {
 
 
     return (
