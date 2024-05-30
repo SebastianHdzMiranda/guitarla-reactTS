@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { db } from '../data/db'
 import { useMemo } from 'react'
-import type { CartItem, Guitar } from '../types/types'
+import type { CartItem, Guitar, GuitarID } from '../types/types'
 
 // custom hooks 
 const useCart = ()=> {
@@ -45,12 +45,12 @@ const useCart = ()=> {
         setCarrito( prevCarrito => [...prevCarrito, newItem] )
     }
 
-    const deleteItem = (id)=> {
+    const deleteItem = (id: GuitarID)=> {
         const updateCarrito = carrito.filter( guitar => guitar.id !== id );
         setCarrito(updateCarrito);
     }
 
-    const incrementarCantidad = (id)=> {
+    const incrementarCantidad = (id: GuitarID)=> {
         const updateCarrito = carrito.map( item => {
             if (item.id === id && item.quantify < MAX_ITEMS) {
             item.quantify++;
@@ -61,7 +61,7 @@ const useCart = ()=> {
         setCarrito(updateCarrito);
     }
 
-    const decrementarCantidad = (id)=>{
+    const decrementarCantidad = (id: GuitarID)=>{
         const updateCarrito = carrito.map( item => {
             if (item.id === id && item.quantify > MIN_ITEMS) {
                 item.quantify--;

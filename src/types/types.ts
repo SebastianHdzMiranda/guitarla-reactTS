@@ -11,6 +11,10 @@ export type CartItem = Guitar & {
     quantify: number
 }
 
+/*LookUp que hereda de un type una UNICA prop */
+export type GuitarID = Guitar['id'];
+
+/** EJEMPLOS de PICK y OMIT */
 // Heredamos las props de Guitar que seleccionamos en Pick
 export type PickItem = Pick< Guitar, 'id' | 'name' | 'price'> & {
     quantify: number
