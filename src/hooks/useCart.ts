@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { db } from '../data/db'
 import { useMemo } from 'react'
-import type { CartItem } from '../types/types'
+import type { CartItem, Guitar } from '../types/types'
 
 // custom hooks 
 const useCart = ()=> {
@@ -27,21 +27,22 @@ const useCart = ()=> {
     }, [carrito]);
     
 
-    const addToCart = (item) => {
+    const addToCart = ( item : Guitar ) => {
         // Me verifica la posicion exacta donde el id es igual a item.id
         const itemExist = carrito.findIndex( guitar => guitar.id  === item.id );
 
         if (itemExist >= 0) {
-            if (item.quantify < MAX_ITEMS) {
-            const updateCarrito = [...carrito];
-            updateCarrito[itemExist].quantify++;
-            setCarrito(updateCarrito);
+            if (carrito[itemExist].quantify < MAX_ITEMS) {
+                const updateCarrito = [...carrito];
+                updateCarrito[itemExist].quantify++;
+                setCarrito(updateCarrito);
             }
             return;
         }
+        // Nuevo item de tipo 'CartItem' que acepta la prop quantify
+        const newItem : CartItem = {...item, quantify: 1};
 
-        item.quantify = 1;
-        setCarrito( prevCarrito => [...prevCarrito, item] )
+        setCarrito( prevCarrito => [...prevCarrito, newItem] )
     }
 
     const deleteItem = (id)=> {
@@ -63,7 +64,7 @@ const useCart = ()=> {
     const decrementarCantidad = (id)=>{
         const updateCarrito = carrito.map( item => {
             if (item.id === id && item.quantify > MIN_ITEMS) {
-            item.quantify--;
+                item.quantify--;
             }
             return item;
         });
