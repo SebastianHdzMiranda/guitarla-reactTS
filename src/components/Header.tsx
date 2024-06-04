@@ -1,17 +1,17 @@
-import { CartItem, GuitarID } from "../types/types";
+import { Dispatch, useMemo } from "react";
+import { CartItem } from "../types/types";
+import { CarritoActions } from "../reducers/carrito-reducer";
 
 type HeaderProps = {
     carrito: CartItem[]
-    deleteItem: (id: GuitarID) => void
-    incrementarCantidad: (id: GuitarID) => void
-    decrementarCantidad: (id: GuitarID) => void
-    vaciarCarrito: () => void
-    carritoVacio: boolean
-    carritoTotal: () => number
+    dispatch: Dispatch<CarritoActions>
 }
 
-function Header({carrito, deleteItem, incrementarCantidad, decrementarCantidad, vaciarCarrito, carritoVacio, carritoTotal}: HeaderProps) {
+function Header({ carrito, dispatch }: HeaderProps) {
 
+
+    const carritoVacio = useMemo( ()=> carrito.length === 0, [carrito]);
+    const carritoTotal = ()=> carrito.reduce( (total, item) => total + (item.quantify * item.price) , 0);
 
     return (
         <header className="py-5 header">
@@ -59,7 +59,7 @@ function Header({carrito, deleteItem, incrementarCantidad, decrementarCantidad, 
                                                                 <button
                                                                     type="button"
                                                                     className="btn btn-dark"
-                                                                    onClick={()=> decrementarCantidad(id)}
+                                                                    onClick={()=> dispatch({type: "decrementar-cantidad", payload: {id}})}
                                                                 >
                                                                     -
                                                                 </button>
@@ -67,7 +67,7 @@ function Header({carrito, deleteItem, incrementarCantidad, decrementarCantidad, 
                                                                 <button
                                                                     type="button"
                                                                     className="btn btn-dark"
-                                                                    onClick={()=> incrementarCantidad(id)}
+                                                                    onClick={()=> dispatch({type: "incrementar-cantidad", payload: {id}})}  
                                                                 >
                                                                     +
                                                                 </button>
@@ -76,7 +76,7 @@ function Header({carrito, deleteItem, incrementarCantidad, decrementarCantidad, 
                                                                 <button
                                                                     className="btn btn-danger"
                                                                     type="button"
-                                                                    onClick={()=> deleteItem(id)}
+                                                                    onClick={()=> dispatch({type: 'delete-item', payload: {id}})}
                                                                 >
                                                                     X
                                                                 </button>
@@ -90,7 +90,7 @@ function Header({carrito, deleteItem, incrementarCantidad, decrementarCantidad, 
                                         <p className="text-end">Total pagar: <span className="fw-bold">${carritoTotal()}</span></p>
                                     </>
                                 }
-                                <button className="btn btn-dark w-100 mt-3 p-2" onClick={vaciarCarrito}>Vaciar Carrito</button>
+                                <button className="btn btn-dark w-100 mt-3 p-2" onClick={()=> dispatch({type: 'vaciar-carrito'})}>Vaciar Carrito</button>
 
                             </div>
                         </div>

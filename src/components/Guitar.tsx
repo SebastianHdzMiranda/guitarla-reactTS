@@ -1,13 +1,15 @@
+import { Dispatch } from 'react';
 import type { Guitar } from '../types/types'
+import { CarritoActions } from '../reducers/carrito-reducer';
 
 
 // Por convencion se asigna el nombre props al ultimo
 type GuitarProps = {
     guitar: Guitar
-    addToCart: (item: Guitar) => void
+    dispatch: Dispatch<CarritoActions>
 }
 
-function Guitar({guitar, addToCart} : GuitarProps ) {
+function Guitar({guitar, dispatch} : GuitarProps ) {
     const {name, image, description, price} = guitar;
 
 
@@ -23,7 +25,7 @@ function Guitar({guitar, addToCart} : GuitarProps ) {
                 <button 
                     type="button"
                     className="btn btn-dark w-100"
-                    onClick={()=> addToCart(guitar)}
+                    onClick={()=> dispatch({type: 'add-to-cart', payload: { item: guitar}})}
                 >Agregar al Carrito</button>
             </div>
         </div>
