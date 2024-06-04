@@ -42,15 +42,16 @@ export const carritoReducer = (state = initialState , action: CarritoActions) =>
 
         
         if (itemExist) {
-
             updateCarrito = state.carrito.map( item => {
 
                 if (item.id === itemExist.id) {
                     if (item.quantify < MAX_ITEMS) {
-                        return {...item, quantify: item.quantify++}
+                        return {...item, quantify: item.quantify+1}
                     }
+                    return item;
+                } else {
+                    return item;
                 }
-                return item;
             });
             
         } else {
